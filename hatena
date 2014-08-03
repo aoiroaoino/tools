@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+BLOG_DIR=/Users/aoino/blog/hatena
+
+DATE=`date +"%Y%m%d"`
+FILE_NAME=$1
+
+if [[ "$FILE_NAME" = "" ]]; then
+  echo -n "File Name: "
+  read FILE_NAME
+  if [[ "$FILE_NAME" = "" ]]; then
+    echo "ファイル名が入力されていません"
+    exit 1
+  fi
+fi
+
+if [[ -e "$BLOG_DIR/$FILE_NAME" ]]; then
+  echo "そのファイルは既に存在しています"
+  exit 1
+fi
+
+vim ${BLOG_DIR}/${DATE}_${FILE_NAME}
+
